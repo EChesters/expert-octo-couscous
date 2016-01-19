@@ -10,7 +10,7 @@
 // when I run the command
 // then I see the environment containing my flag
 
-describe("A suite", function() {
+describe("JSON Extractor", function() {
   it("contains spec with an expectation", function() {
     expect(true).toBe(true);
   });
