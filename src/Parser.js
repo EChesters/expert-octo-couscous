@@ -29,6 +29,6 @@ Parser.prototype.parse = function(json, key) {
 		}
     }
     
-    this.objeto.sort(function(a,b){ return a.environment > b.environment})
+    this.objeto.sort(function(a,b){ return a.environment > b.environment || a.privateIp > b.privateIp })
 };
 

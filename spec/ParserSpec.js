@@ -67,4 +67,27 @@ describe("Parser", function() {
 
   });
 
+  it("should retrieve ip addresses in alphabetical order", function() {
+  	var json = '{"Reservations":[{"Instances":[{' +
+  					'"PrivateIpAddress":"172.31.15.172",' +
+  					'"Tags":[{"Value":"JAMIE-euw1-DEPLOY","Key":"Name"},' +
+  							'{"Value":"cog-euw1-iot-deploy-JAMIEAPI","Key":"aws:autoscaling:groupName"}]},' +
+  					'{"PrivateIpAddress":"172.31.11.200",' +
+  					'"Tags":[{"Value":"JAMIE-euw1-DEPLOY","Key":"Name"},' +
+  							'{"Value":"cog-euw1-iot-deploy-JAMIEAPI","Key":"aws:autoscaling:groupName"}]}]}]}'
+
+    parser.parse(json);
+
+    var obj1 = new Object()
+    obj1.privateIp = "172.31.11.200"
+    obj1.environment = "JAMIE-euw1-DEPLOY"
+
+    var obj2 = new Object()
+    obj2.privateIp = "172.31.15.172"
+    obj2.environment = "JAMIE-euw1-DEPLOY"
+
+    expect([obj1,obj2]).toEqual(parser.objeto);
+
+  });
+
 });
