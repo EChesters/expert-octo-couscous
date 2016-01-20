@@ -40,7 +40,31 @@ describe("Parser", function() {
   							'{"Value":"cog-euw1-iot-deploy-JAMIEAPI","Key":"aws:autoscaling:groupName"}]}]}]}'
 
     parser.parse(json, "Jamie");
-    expect(parser.objeto.environment).toEqual("JAMIE-euw1-DEPLOY");
+    expect(parser.objeto[0].environment).toEqual("JAMIE-euw1-DEPLOY");
+  });
+
+
+  it("should retrieve environments in alphabetical order", function() {
+  	var json = '{"Reservations":[{"Instances":[{' +
+  					'"PrivateIpAddress":"172.31.15.172",' +
+  					'"Tags":[{"Value":"PUBLICAPI-euw1-DEPLOY","Key":"Name"},' +
+  							'{"Value":"cog-euw1-iot-deploy-PUBLICAPI","Key":"aws:autoscaling:groupName"}]},' +
+  					'{"PrivateIpAddress":"172.31.86.200",' +
+  					'"Tags":[{"Value":"JAMIE-euw1-DEPLOY","Key":"Name"},' +
+  							'{"Value":"cog-euw1-iot-deploy-JAMIEAPI","Key":"aws:autoscaling:groupName"}]}]}]}'
+
+    parser.parse(json);
+
+    var obj1 = new Object()
+    obj1.privateIp = "172.31.86.200"
+    obj1.environment = "JAMIE-euw1-DEPLOY"
+
+    var obj2 = new Object()
+    obj2.privateIp = "172.31.15.172"
+    obj2.environment = "PUBLICAPI-euw1-DEPLOY"
+
+    expect([obj1,obj2]).toEqual(parser.objeto);
+
   });
 
 });

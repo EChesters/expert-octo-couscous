@@ -21,10 +21,14 @@ Parser.prototype.parse = function(json, key) {
     if(typeof key != "undefined"){
 		for(var k in this.objeto){
 			if (this.objeto[k].environment.toUpperCase().indexOf(key.toUpperCase()) > -1) {
-				this.objeto = this.objeto[k]
-				break
+				var found = this.objeto[k]
+				this.objeto = new Array()
+				this.objeto[0] = found
+ 				break
 			}
 		}
     }
+    
+    this.objeto.sort(function(a,b){ return a.environment > b.environment})
 };
 
