@@ -28,7 +28,14 @@ Parser.prototype.parse = function(json, key) {
 			}
 		}
     }
-    
-    this.objeto.sort(function(a,b){ return a.environment > b.environment || a.privateIp > b.privateIp })
+   console.log("before finish " + JSON.stringify(this.objecto)) 
+    return this.objeto.sort(function(a,b){ return a.environment > b.environment || a.privateIp > b.privateIp })
 };
 
+module.exports = {
+	  foo: function(json,key){
+	       var p = new Parser()
+		return p.parse(json,key)
+	       }
+	}
+		
