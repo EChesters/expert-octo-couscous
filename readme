@@ -1,0 +1,6 @@
+to run it, first, install libraries:
+npm install body-parser
+npm install express
+
+once installed run:
+node app.js
